@@ -1,0 +1,626 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>FOX — WEG-Verwaltung &amp; Immobilien­makler im Rhein-Main-Gebiet</title>
+<meta name="description" content="FOX — Familienunternehmen für WEG-Verwaltung und den Verkauf hochpreisiger Immobilien im Rhein-Main-Gebiet mit regionalem Bezug zu Darmstadt. 28 Jahre Erfahrung." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --rust:#b5501f;           /* logo brown-rust */
+    --rust-deep:#8a3a14;
+    --rust-soft:#d8794a;
+    --sand:#ecd79e;           /* inner badge */
+    --sand-soft:#f2e3b8;
+    --cream:#fbf1d8;          /* page bg */
+    --cream-2:#f5e7c4;
+    --ink:#2a1a10;            /* deep brown ink */
+    --ink-2:#4a2e1f;
+    --line:rgba(42,26,16,.18);
+    --line-soft:rgba(42,26,16,.08);
+    --cobalt:#1f3a78;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    background:var(--cream);
+    color:var(--ink);
+    font-family:"Inter",system-ui,sans-serif;
+    font-weight:400;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1240px;margin:0 auto;padding:0 32px}
+  .mono-label{
+    font-family:"Inter",sans-serif;font-weight:500;
+    font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:var(--rust);
+  }
+
+  /* ── LOGOS ─────────────────────────────────────────── */
+  .fox-mark{display:block}
+  .fox-mark .face{fill:var(--rust)}
+  .fox-mark .eye{fill:var(--cream)}
+  .fox-badge{display:inline-flex;align-items:center;gap:14px}
+  .fox-wordmark{
+    font-family:"Inter",sans-serif;font-weight:600;
+    letter-spacing:.18em;font-size:22px;color:var(--rust);
+  }
+
+  /* ── NAV ───────────────────────────────────────────── */
+  .nav{
+    position:sticky;top:0;z-index:50;
+    background:linear-gradient(to bottom,rgba(251,241,216,.96),rgba(251,241,216,.85));
+    backdrop-filter:saturate(120%) blur(6px);
+    border-bottom:1px solid var(--line-soft);
+  }
+  .nav-inner{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:16px 32px;max-width:1240px;margin:0 auto;
+  }
+  .nav ul{display:flex;gap:34px;list-style:none;margin:0;padding:0;font-size:13px;letter-spacing:.08em;text-transform:uppercase}
+  .nav ul a{position:relative;padding:6px 0;transition:color .25s ease}
+  .nav ul a:hover{color:var(--rust)}
+  .nav-cta{
+    border:1px solid var(--ink);padding:10px 18px;font-size:12px;letter-spacing:.18em;text-transform:uppercase;
+    background:var(--ink);color:var(--cream);transition:.25s ease;
+  }
+  .nav-cta:hover{background:var(--rust);border-color:var(--rust)}
+  @media (max-width:820px){.nav ul{display:none}}
+
+  /* ── HERO ──────────────────────────────────────────── */
+  .hero{position:relative;padding:88px 0 96px;overflow:hidden}
+  .hero::before{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background:
+      radial-gradient(900px 380px at 78% 18%, rgba(236,215,158,.55), transparent 60%),
+      radial-gradient(700px 420px at 12% 90%, rgba(181,80,31,.10), transparent 60%);
+  }
+  .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:64px;align-items:end;position:relative}
+  @media (max-width:980px){.hero-grid{grid-template-columns:1fr;gap:48px}}
+  .eyebrow{display:flex;align-items:center;gap:14px;margin-bottom:32px}
+  .eyebrow .rule{height:1px;width:48px;background:var(--rust)}
+  h1.display{
+    font-family:"Cormorant Garamond",serif;font-weight:500;
+    font-size:clamp(48px,7.2vw,104px);
+    line-height:.98;letter-spacing:-.01em;margin:0 0 28px;color:var(--ink);
+  }
+  h1.display em{font-style:italic;color:var(--rust);font-weight:500}
+  .lede{
+    font-family:"Cormorant Garamond",serif;font-style:italic;
+    font-size:clamp(20px,1.6vw,24px);line-height:1.45;
+    color:var(--ink-2);max-width:560px;
+  }
+  .hero-meta{
+    display:flex;flex-wrap:wrap;gap:28px 44px;margin-top:48px;
+    padding-top:28px;border-top:1px solid var(--line);
+  }
+  .hero-meta div{display:flex;flex-direction:column;gap:6px}
+  .hero-meta b{
+    font-family:"Cormorant Garamond",serif;font-weight:600;font-size:34px;
+    color:var(--ink);letter-spacing:.01em;
+  }
+  .hero-meta span{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-2);opacity:.75}
+
+  /* hero panel */
+  .hero-panel{
+    position:relative;background:var(--ink);color:var(--cream);
+    padding:40px 36px 36px;border:1px solid var(--ink);
+    box-shadow:18px 18px 0 0 var(--rust), 18px 18px 0 1px var(--ink);
+  }
+  .hero-panel .tag{
+    display:inline-block;font-size:11px;letter-spacing:.28em;text-transform:uppercase;
+    color:var(--sand);margin-bottom:18px;
+  }
+  .hero-panel h3{
+    font-family:"Cormorant Garamond",serif;font-weight:500;
+    font-size:30px;line-height:1.15;margin:0 0 14px;
+  }
+  .hero-panel p{font-size:14px;line-height:1.7;color:rgba(251,241,216,.78);margin:0 0 22px}
+  .hero-panel ul{list-style:none;padding:0;margin:0 0 26px;border-top:1px solid rgba(251,241,216,.15)}
+  .hero-panel li{
+    display:flex;justify-content:space-between;align-items:center;
+    padding:14px 0;border-bottom:1px solid rgba(251,241,216,.15);
+    font-size:13px;letter-spacing:.04em;
+  }
+  .hero-panel li span{color:var(--sand);font-family:"Cormorant Garamond",serif;font-style:italic;font-size:18px}
+  .hero-panel .btn{
+    display:inline-flex;align-items:center;gap:12px;padding:12px 18px;
+    border:1px solid var(--sand);color:var(--sand);
+    font-size:12px;letter-spacing:.22em;text-transform:uppercase;transition:.25s ease;
+  }
+  .hero-panel .btn:hover{background:var(--sand);color:var(--ink)}
+  .hero-panel .btn::after{content:"→";font-family:serif;font-size:16px}
+
+  /* big background watermark fox in hero */
+  .hero-watermark{
+    position:absolute;right:-80px;top:-40px;width:520px;opacity:.06;pointer-events:none;
+  }
+
+  /* ticker */
+  .ticker{
+    margin-top:72px;padding:18px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+    display:flex;gap:48px;overflow:hidden;white-space:nowrap;
+    font-family:"Cormorant Garamond",serif;font-style:italic;font-size:20px;color:var(--ink-2);
+  }
+  .ticker span{display:inline-flex;align-items:center;gap:48px}
+  .ticker .dot{width:6px;height:6px;background:var(--rust);border-radius:50%;display:inline-block}
+
+  /* ── SECTIONS ──────────────────────────────────────── */
+  section{padding:120px 0;position:relative}
+  .section-head{display:grid;grid-template-columns:.6fr 1fr;gap:64px;margin-bottom:72px;align-items:end}
+  @media (max-width:820px){.section-head{grid-template-columns:1fr;gap:32px;margin-bottom:48px}}
+  .section-head h2{
+    font-family:"Cormorant Garamond",serif;font-weight:500;
+    font-size:clamp(38px,4.6vw,60px);line-height:1.04;margin:14px 0 0;letter-spacing:-.005em;
+  }
+  .section-head h2 em{font-style:italic;color:var(--rust)}
+  .section-head p{font-size:15px;line-height:1.75;color:var(--ink-2);max-width:520px;margin:0}
+
+  /* ── ZWEI GESCHÄFTSFELDER ──────────────────────────── */
+  .fields{background:var(--cream-2);border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft)}
+  .field-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line)}
+  @media (max-width:820px){.field-grid{grid-template-columns:1fr}}
+  .field{background:var(--cream-2);padding:56px 48px;position:relative;transition:background .35s ease}
+  .field:hover{background:var(--cream)}
+  .field-no{
+    font-family:"Cormorant Garamond",serif;font-style:italic;font-size:22px;
+    color:var(--rust);margin-bottom:36px;display:flex;align-items:center;gap:14px;
+  }
+  .field-no::after{content:"";flex:1;height:1px;background:var(--line)}
+  .field h3{font-family:"Cormorant Garamond",serif;font-weight:500;font-size:38px;line-height:1.08;margin:0 0 20px}
+  .field h3 em{font-style:italic;color:var(--rust)}
+  .field > p{font-size:14.5px;line-height:1.75;color:var(--ink-2);max-width:440px;margin:0 0 32px}
+  .field ul{list-style:none;padding:0;margin:0 0 36px}
+  .field ul li{
+    padding:14px 0;border-top:1px solid var(--line-soft);
+    display:flex;align-items:baseline;gap:14px;font-size:14px;
+  }
+  .field ul li:last-child{border-bottom:1px solid var(--line-soft)}
+  .field ul li::before{
+    content:"";width:6px;height:6px;background:var(--rust);
+    display:inline-block;flex-shrink:0;transform:translateY(-2px);
+  }
+  .field .meta{
+    display:flex;justify-content:space-between;align-items:end;gap:24px;
+    padding-top:24px;border-top:1px solid var(--line);
+  }
+  .field .years{font-family:"Cormorant Garamond",serif;font-size:54px;line-height:1;color:var(--ink)}
+  .field .years em{font-style:italic;color:var(--rust)}
+  .field .meta small{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-2);opacity:.75}
+  .field-link{
+    display:inline-flex;align-items:center;gap:10px;margin-top:24px;
+    font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink);
+    padding-bottom:4px;border-bottom:1px solid var(--ink);transition:.25s;
+  }
+  .field-link:hover{color:var(--rust);border-color:var(--rust)}
+
+  /* ── PHILOSOPHIE / WERTE ───────────────────────────── */
+  .values .v-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
+  @media (max-width:820px){.values .v-grid{grid-template-columns:1fr}}
+  .v-card{
+    padding:40px 32px;border:1px solid var(--line);background:var(--cream);
+    position:relative;overflow:hidden;transition:.35s ease;
+  }
+  .v-card::before{
+    content:"";position:absolute;top:0;left:0;width:48px;height:3px;background:var(--rust);
+    transition:width .4s ease;
+  }
+  .v-card:hover::before{width:100%}
+  .v-card:hover{transform:translateY(-3px)}
+  .v-num{font-family:"Cormorant Garamond",serif;font-style:italic;font-size:18px;color:var(--rust);margin-bottom:24px}
+  .v-card h4{font-family:"Cormorant Garamond",serif;font-weight:500;font-size:26px;margin:0 0 14px;line-height:1.15}
+  .v-card h4 em{font-style:italic;color:var(--rust)}
+  .v-card p{font-size:14px;line-height:1.75;color:var(--ink-2);margin:0}
+
+  /* ── REGION / DARMSTADT ────────────────────────────── */
+  .region{background:var(--ink);color:var(--cream);position:relative;overflow:hidden}
+  .region::before{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background:
+      radial-gradient(800px 400px at 85% 20%, rgba(236,215,158,.16), transparent 60%),
+      radial-gradient(700px 500px at 10% 80%, rgba(181,80,31,.30), transparent 60%);
+  }
+  .region-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;position:relative}
+  @media (max-width:820px){.region-grid{grid-template-columns:1fr;gap:48px}}
+  .region .mono-label{color:var(--sand)}
+  .region h2{
+    font-family:"Cormorant Garamond",serif;font-weight:500;
+    font-size:clamp(40px,5vw,68px);line-height:1.04;margin:16px 0 24px;color:var(--cream);
+  }
+  .region h2 em{font-style:italic;color:var(--sand)}
+  .region p{font-size:15.5px;line-height:1.8;color:rgba(251,241,216,.78);max-width:520px}
+  .region-stats{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:rgba(251,241,216,.18);border:1px solid rgba(251,241,216,.18)}
+  .region-stats div{padding:36px 28px;background:var(--ink)}
+  .region-stats b{display:block;font-family:"Cormorant Garamond",serif;font-weight:500;font-size:54px;line-height:1;color:var(--sand);margin-bottom:10px}
+  .region-stats span{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:rgba(251,241,216,.7)}
+
+  /* ── CTA ───────────────────────────────────────────── */
+  .cta{padding:140px 0 120px;position:relative;overflow:hidden}
+  .cta::before{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background:
+      radial-gradient(700px 360px at 30% 30%, rgba(236,215,158,.55), transparent 60%),
+      radial-gradient(700px 400px at 80% 80%, rgba(181,80,31,.10), transparent 60%);
+  }
+  .cta-card{
+    position:relative;background:var(--cream);border:1px solid var(--ink);padding:72px 64px;
+    box-shadow:22px 22px 0 0 var(--rust);
+    display:grid;grid-template-columns:1.2fr .8fr;gap:64px;align-items:center;
+  }
+  @media (max-width:820px){.cta-card{grid-template-columns:1fr;padding:48px 32px;box-shadow:14px 14px 0 0 var(--rust)}}
+  .cta-card h2{
+    font-family:"Cormorant Garamond",serif;font-weight:500;
+    font-size:clamp(38px,4.8vw,60px);line-height:1.04;margin:16px 0 22px;
+  }
+  .cta-card h2 em{font-style:italic;color:var(--rust)}
+  .cta-card p{font-size:15px;line-height:1.75;color:var(--ink-2);margin:0 0 32px;max-width:480px}
+  .cta-actions{display:flex;flex-direction:column;gap:14px}
+  .btn-primary,.btn-ghost{
+    padding:18px 24px;font-size:12px;letter-spacing:.24em;text-transform:uppercase;
+    display:inline-flex;align-items:center;justify-content:space-between;gap:16px;
+    border:1px solid var(--ink);transition:.25s ease;
+  }
+  .btn-primary{background:var(--ink);color:var(--cream)}
+  .btn-primary:hover{background:var(--rust);border-color:var(--rust)}
+  .btn-primary::after{content:"→";font-family:serif;font-size:18px}
+  .btn-ghost{background:transparent;color:var(--ink)}
+  .btn-ghost:hover{background:var(--ink);color:var(--cream)}
+  .btn-ghost::after{content:"↓";font-family:serif;font-size:18px}
+
+  /* ── FOOTER ────────────────────────────────────────── */
+  footer{background:var(--ink);color:rgba(251,241,216,.7);padding:64px 0 32px;font-size:13px}
+  .foot-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;margin-bottom:48px}
+  @media (max-width:820px){.foot-grid{grid-template-columns:1fr 1fr;gap:32px}}
+  .foot-brand .lockup{display:flex;align-items:center;gap:14px;margin-bottom:14px}
+  .foot-brand .lockup .word{font-family:"Inter",sans-serif;font-weight:600;letter-spacing:.22em;font-size:26px;color:var(--sand)}
+  .foot-brand p{margin:0;line-height:1.7;max-width:340px;font-size:13.5px}
+  footer h5{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--sand);margin:0 0 18px}
+  footer ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px}
+  footer ul a:hover{color:var(--sand)}
+  .foot-bottom{
+    border-top:1px solid rgba(251,241,216,.15);padding-top:24px;
+    display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;
+    font-size:12px;letter-spacing:.06em;color:rgba(251,241,216,.55);
+  }
+
+  /* reveal */
+  .reveal{opacity:0;transform:translateY(20px);transition:opacity .9s ease,transform .9s ease}
+  .reveal.in{opacity:1;transform:none}
+</style>
+</head>
+<body>
+
+<!-- ── FOX LOGO (inline SVG, two variants) ─────────────────── -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <!-- Solo fox head, viewBox 100x100 -->
+    <symbol id="fox-solo" viewBox="0 0 100 100">
+      <path class="face" d="
+        M 18 22
+        L 30 38
+        L 70 38
+        L 82 22
+        L 78 50
+        Q 78 64 65 76
+        L 50 88
+        L 35 76
+        Q 22 64 22 50
+        Z"/>
+      <path class="eye" d="M 32 48 Q 40 44 46 50 Q 40 52 32 48 Z"/>
+      <path class="eye" d="M 68 48 Q 60 44 54 50 Q 60 52 68 48 Z"/>
+    </symbol>
+    <!-- Full FOX badge -->
+    <symbol id="fox-badge-sym" viewBox="0 0 320 120">
+      <rect x="4" y="4" width="312" height="112" fill="none" stroke="#b5501f" stroke-width="8"/>
+      <rect x="16" y="16" width="288" height="88" fill="#ecd79e"/>
+      <!-- F -->
+      <path fill="#b5501f" d="M 40 30 L 90 30 L 90 44 L 58 44 L 58 56 L 84 56 L 84 70 L 58 70 L 58 90 L 40 90 Z"/>
+      <!-- Fox head in middle, centered around x=160 -->
+      <g transform="translate(122,28) scale(.76)">
+        <path fill="#b5501f" d="
+          M 12 8
+          L 24 24
+          L 64 24
+          L 76 8
+          L 72 36
+          Q 72 50 59 62
+          L 44 74
+          L 29 62
+          Q 16 50 16 36
+          Z"/>
+        <path fill="#ecd79e" d="M 26 34 Q 34 30 40 36 Q 34 38 26 34 Z"/>
+        <path fill="#ecd79e" d="M 62 34 Q 54 30 48 36 Q 54 38 62 34 Z"/>
+      </g>
+      <!-- X -->
+      <path fill="#b5501f" d="M 230 30 L 248 30 L 260 50 L 272 30 L 290 30 L 270 60 L 290 90 L 272 90 L 260 70 L 248 90 L 230 90 L 250 60 Z"/>
+    </symbol>
+  </defs>
+</svg>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a href="#" class="fox-badge" aria-label="FOX — Startseite">
+      <svg class="fox-mark" width="38" height="38" aria-hidden="true"><use href="#fox-solo"/></svg>
+      <span class="fox-wordmark">FOX</span>
+    </a>
+    <nav><ul>
+      <li><a href="#haus">Das Haus</a></li>
+      <li><a href="#felder">Leistungen</a></li>
+      <li><a href="#philosophie">Philosophie</a></li>
+      <li><a href="#region">Region</a></li>
+    </ul></nav>
+    <a class="nav-cta" href="#kontakt">Termin vereinbaren</a>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="haus">
+  <svg class="hero-watermark" viewBox="0 0 100 100" aria-hidden="true"><use href="#fox-solo"/></svg>
+
+  <div class="wrap hero-grid">
+    <div class="reveal">
+      <div class="eyebrow">
+        <span class="rule"></span>
+        <span class="mono-label">Familienunternehmen · Rhein-Main · seit 1996</span>
+      </div>
+      <h1 class="display">
+        Häuser, die <em>bleiben.</em><br/>
+        Verwaltung, der man <em>vertraut.</em>
+      </h1>
+      <p class="lede">
+        FOX vereint die ruhige Sorgfalt eines Familienhauses
+        für WEG-Verwaltung mit der kuratorischen Hand eines
+        Maklers für hochpreisige Immobilien im Rhein-Main-Gebiet —
+        mit tiefem regionalen Bezug zu Darmstadt.
+      </p>
+
+      <div class="hero-meta">
+        <div><b>28</b><span>Jahre WEG-Verwaltung</span></div>
+        <div><b>20<sup style="font-size:.5em">+</sup></b><span>Jahre Immobilienverkauf</span></div>
+        <div><b>Darmstadt</b><span>Regional verwurzelt</span></div>
+      </div>
+    </div>
+
+    <aside class="hero-panel reveal">
+      <span class="tag">Heute auf dem Schreibtisch</span>
+      <h3>Diskrete Beratung — auf Termin, ohne Umwege.</h3>
+      <p>Ob WEG-Versammlung, Eigentümerwechsel oder
+      vertraulicher Verkauf einer hochpreisigen Immobilie:
+      jedes Anliegen bleibt persönlich begleitet.</p>
+      <ul>
+        <li>Erstgespräch <span>kostenfrei</span></li>
+        <li>Wertindikation <span>48 Std.</span></li>
+        <li>Digitale Akte <span>inklusive</span></li>
+      </ul>
+      <a class="btn" href="#kontakt">Termin anfragen</a>
+    </aside>
+  </div>
+
+  <div class="wrap">
+    <div class="ticker">
+      <span>WEG-Verwaltung<span class="dot"></span></span>
+      <span>Hochpreisige Immobilien<span class="dot"></span></span>
+      <span>Rhein-Main-Gebiet<span class="dot"></span></span>
+      <span>Darmstadt &amp; Bergstraße<span class="dot"></span></span>
+      <span>Transparenz<span class="dot"></span></span>
+      <span>Digitalisierung<span class="dot"></span></span>
+      <span>Persönliche Betreuung<span class="dot"></span></span>
+      <span>Seit 1996<span class="dot"></span></span>
+    </div>
+  </div>
+</section>
+
+<!-- ZWEI GESCHÄFTSFELDER -->
+<section class="fields" id="felder">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div>
+        <span class="mono-label">§ 02 — Leistungen</span>
+        <h2>Zwei Disziplinen,<br/><em>ein Haus.</em></h2>
+      </div>
+      <p>
+        Unter einem Dach vereinen wir die langfristige Verantwortung
+        eines WEG-Verwalters mit der kuratorischen Sorgfalt eines
+        Maklers für anspruchsvolle Eigentümer. Beide Felder teilen
+        denselben Maßstab: Diskretion, Präzision, Beständigkeit.
+      </p>
+    </div>
+
+    <div class="field-grid">
+      <article class="field reveal">
+        <div class="field-no">I — Verwaltung</div>
+        <h3>WEG-<em>Verwaltung,</em> die nicht verwaltet — sondern führt.</h3>
+        <p>
+          Wir begleiten Wohnungseigentümergemeinschaften
+          mit der Ruhe eines erfahrenen Hauses und der
+          Klarheit moderner, digitaler Prozesse.
+        </p>
+        <ul>
+          <li>Kaufmännische &amp; technische Verwaltung</li>
+          <li>Vorbereitung &amp; Leitung der Eigentümerversammlung</li>
+          <li>Digitale Eigentümerakte &amp; Online-Portal</li>
+          <li>Instandhaltungs- &amp; Sanierungsplanung</li>
+          <li>Transparente Jahresabrechnung</li>
+        </ul>
+        <div class="meta">
+          <div class="years"><em>28</em> Jahre</div>
+          <small>Erfahrung in der WEG-Verwaltung</small>
+        </div>
+        <a class="field-link" href="#kontakt">Verwaltung anfragen</a>
+      </article>
+
+      <article class="field reveal">
+        <div class="field-no">II — Vermittlung</div>
+        <h3>Makler für <em>hochpreisige</em> Immobilien.</h3>
+        <p>
+          Wir vermitteln Häuser, Villen und Eigentumswohnungen
+          mit Charakter — diskret, kuratiert, mit tiefer
+          Kenntnis der Lagen rund um Darmstadt.
+        </p>
+        <ul>
+          <li>Strategische Wertermittlung &amp; Marktanalyse</li>
+          <li>Inszenierung: Fotografie, Exposé, Film</li>
+          <li>Diskreter, kuratierter Käuferkreis</li>
+          <li>Verhandlungsführung auf Eigentümerseite</li>
+          <li>Begleitung bis zur Übergabe</li>
+        </ul>
+        <div class="meta">
+          <div class="years"><em>20</em><sup style="font-size:.45em;color:var(--rust)">+</sup> Jahre</div>
+          <small>Erfahrung im Immobilienverkauf</small>
+        </div>
+        <a class="field-link" href="#kontakt">Verkauf besprechen</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- PHILOSOPHIE / WERTE -->
+<section class="values" id="philosophie">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div>
+        <span class="mono-label">§ 03 — Philosophie</span>
+        <h2>Drei Haltungen,<br/>nicht <em>verhandelbar.</em></h2>
+      </div>
+      <p>
+        Was wir Eigentümern, Käufern und Gemeinschaften
+        versprechen, lässt sich auf drei Worte verdichten —
+        und auf jede Entscheidung anwenden, die wir treffen.
+      </p>
+    </div>
+
+    <div class="v-grid">
+      <div class="v-card reveal">
+        <div class="v-num">i.</div>
+        <h4><em>Transparenz</em></h4>
+        <p>Klare Zahlen, nachvollziehbare Entscheidungen, verständliche Abrechnungen. Wer uns ein Mandat gibt, sieht alles — nicht nur das Ergebnis.</p>
+      </div>
+      <div class="v-card reveal">
+        <div class="v-num">ii.</div>
+        <h4><em>Digitalisierung</em></h4>
+        <p>Eine digitale Akte, ein sicheres Portal, ein Posteingang ohne Reibung. Technik im Hintergrund — damit der Mensch im Vordergrund bleibt.</p>
+      </div>
+      <div class="v-card reveal">
+        <div class="v-num">iii.</div>
+        <h4>Persönliche <em>Betreuung</em></h4>
+        <p>Ein direkter Ansprechpartner, der Sie kennt, Ihr Objekt kennt, Ihre Eigentümer kennt. Kein Callcenter. Kein Ticket. Ein Telefonat.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REGION -->
+<section class="region" id="region">
+  <div class="wrap region-grid">
+    <div class="reveal">
+      <span class="mono-label">§ 04 — Region</span>
+      <h2>Darmstadt &amp; das <em>Rhein-Main-Gebiet.</em></h2>
+      <p>
+        FOX ist hier verwurzelt — in den Villenstraßen
+        des Paulusviertels, in den Lichtbergen des Jugendstils,
+        in den ruhigen Lagen zwischen Bergstraße und Main.
+        Wir kennen die Häuser, die Eigentümer und die
+        Geschichten, die zwischen den Mauern wohnen.
+      </p>
+      <p style="opacity:.85">
+        Diese Nähe ist kein Marketing — sie ist die Grundlage
+        unserer Bewertungen, unserer Empfehlungen und unserer
+        Diskretion.
+      </p>
+    </div>
+
+    <div class="region-stats reveal">
+      <div><b>1996</b><span>Gründungsjahr</span></div>
+      <div><b>100%</b><span>Inhabergeführt</span></div>
+      <div><b>Rhein-Main</b><span>Tätigkeitsgebiet</span></div>
+      <div><b>Darmstadt</b><span>Heimathafen</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta" id="kontakt">
+  <div class="wrap">
+    <div class="cta-card reveal">
+      <div>
+        <span class="mono-label">§ 05 — Kontakt</span>
+        <h2>Sprechen wir —<br/>in <em>Ruhe.</em></h2>
+        <p>
+          Ob Sie eine Eigentümergemeinschaft neu aufstellen,
+          eine außergewöhnliche Immobilie diskret veräußern
+          oder uns einfach nur kennenlernen möchten:
+          ein erstes Gespräch ist immer der richtige Anfang.
+        </p>
+      </div>
+      <div class="cta-actions">
+        <a class="btn-primary" href="mailto:kontakt@fox-immobilien.de">Termin vereinbaren</a>
+        <a class="btn-ghost" href="#felder">Leistungen ansehen</a>
+        <div style="margin-top:18px;font-size:13px;line-height:1.7;color:var(--ink-2)">
+          <strong style="font-family:'Inter',sans-serif;letter-spacing:.18em;font-size:16px;color:var(--ink)">FOX</strong><br/>
+          Darmstadt · Rhein-Main-Gebiet<br/>
+          +49 (0) 6151 · 00 00 00<br/>
+          kontakt@fox-immobilien.de
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <div class="lockup">
+          <svg width="44" height="44" aria-hidden="true"><use href="#fox-solo"/></svg>
+          <span class="word">FOX</span>
+        </div>
+        <p>Familienunternehmen für WEG-Verwaltung und die diskrete Vermittlung hochpreisiger Immobilien im Rhein-Main-Gebiet. Inhabergeführt seit 1996.</p>
+      </div>
+      <div>
+        <h5>Haus</h5>
+        <ul>
+          <li><a href="#haus">Das Haus</a></li>
+          <li><a href="#philosophie">Philosophie</a></li>
+          <li><a href="#region">Region</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Leistungen</h5>
+        <ul>
+          <li><a href="#felder">WEG-Verwaltung</a></li>
+          <li><a href="#felder">Immobilienverkauf</a></li>
+          <li><a href="#kontakt">Wertindikation</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Kontakt</h5>
+        <ul>
+          <li>Darmstadt</li>
+          <li>+49 (0) 6151 · 00 00 00</li>
+          <li>kontakt@fox-immobilien.de</li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© <span id="y"></span> FOX — Inhabergeführt seit 1996.</span>
+      <span><a href="#">Impressum</a> · <a href="#">Datenschutz</a></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('y').textContent = new Date().getFullYear();
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, {threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+  const t = document.querySelector('.ticker');
+  if(t){ t.innerHTML += t.innerHTML; }
+</script>
+</body>
+</html>
