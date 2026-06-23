@@ -42,49 +42,39 @@
     position:relative;
   }
 
-  /* ── DYNAMIC BACKGROUND ────────────────────────────── */
-  /* fixed canvas of slow-moving gradient blobs whose
-     positions/colors are driven by --scroll and --mx/--my */
-  .bg{
-    position:fixed;inset:0;z-index:-1;pointer-events:none;
-    background:var(--paper);
-    transition:background 1.2s ease;
+  /* ── DYNAMIC VIDEO BACKGROUND (scroll-scrubbed) ────── */
+  .bg-video{
+    position:fixed;inset:0;z-index:-2;pointer-events:none;
+    width:100vw;height:100vh;object-fit:cover;
+    background:var(--ink);
   }
-  .bg .blob{
-    position:absolute;border-radius:50%;filter:blur(80px);
-    opacity:.55;mix-blend-mode:multiply;
-    transition:transform .4s cubic-bezier(.2,.7,.2,1), background-color 1.4s ease, opacity 1.2s ease;
-    will-change:transform;
-  }
-  .bg .b1{
-    width:48vw;height:48vw;left:calc(var(--mx) - 24vw);top:calc(8% + var(--scroll) * 30%);
-    background:var(--accent);
-  }
-  .bg .b2{
-    width:42vw;height:42vw;right:calc(100% - var(--mx) - 16vw);top:calc(40% - var(--scroll) * 20%);
-    background:var(--accent-2);
-  }
-  .bg .b3{
-    width:36vw;height:36vw;left:calc(var(--mx) - 12vw);bottom:calc(8% + var(--scroll) * 25%);
-    background:var(--accent-3);
-  }
-  .bg .b4{
-    width:30vw;height:30vw;right:calc(100% - var(--mx) - 24vw);top:calc(70% - var(--scroll) * 35%);
-    background:var(--accent-4);
-  }
-  /* grain overlay for sophistication */
-  .bg::after{
-    content:"";position:absolute;inset:0;
-    background-image:
-      radial-gradient(rgba(10,10,10,.04) 1px, transparent 1px);
-    background-size:3px 3px;
-    mix-blend-mode:multiply;opacity:.6;
-  }
-  /* as user scrolls deep, background darkens via overlay */
+  /* layered veil over the video: tints + readability gradient */
   .bg-veil{
     position:fixed;inset:0;z-index:-1;pointer-events:none;
-    background:var(--ink);opacity:calc(var(--scroll) * .35);
-    transition:opacity .15s linear;
+    background:
+      radial-gradient(80vmax 60vmax at var(--mx) var(--my),
+        rgba(79,70,229,.18), transparent 60%),
+      linear-gradient(180deg,
+        rgba(10,10,10,.35) 0%,
+        rgba(10,10,10,.45) 50%,
+        rgba(10,10,10,.65) 100%);
+    transition:background .2s ease;
+  }
+  /* grain layer over the whole thing */
+  .bg-grain{
+    position:fixed;inset:0;z-index:-1;pointer-events:none;
+    background-image:radial-gradient(rgba(255,255,255,.05) 1px, transparent 1px);
+    background-size:3px 3px;mix-blend-mode:overlay;opacity:.5;
+  }
+  /* scroll-hint pill */
+  .scrub-hint{
+    position:fixed;left:50%;bottom:24px;transform:translateX(-50%);
+    z-index:40;font-size:10.5px;letter-spacing:.32em;text-transform:uppercase;
+    color:rgba(245,244,240,.7);background:rgba(10,10,10,.4);
+    backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+    padding:10px 18px;border-radius:999px;border:1px solid rgba(245,244,240,.15);
+    opacity:calc(1 - var(--scroll) * 4);transition:opacity .25s ease;
+    pointer-events:none;
   }
 
   a{color:inherit;text-decoration:none}
@@ -443,21 +433,84 @@
   /* respect reduced motion */
   @media (prefers-reduced-motion:reduce){
     *{animation:none!important;transition:none!important}
-    .bg .blob{transition:none}
   }
+
+  /* ── DARK-OVER-VIDEO THEME OVERRIDE ────────────────── */
+  body{background:var(--ink);color:var(--paper)}
+
+  .nav{background:rgba(10,10,10,.55);border-bottom:1px solid rgba(245,244,240,.1)}
+  .fox-mark .face{fill:var(--paper)}
+  .fox-mark .eye{fill:var(--ink)}
+  .fox-wordmark{color:var(--paper)}
+  .nav ul a::after{background:var(--paper)}
+  .nav-cta{background:var(--paper);color:var(--ink);border-color:var(--paper)}
+  .nav-cta:hover{background:var(--accent);border-color:var(--accent);color:var(--paper)}
+
+  .mono-label{color:var(--paper)}
+
+  h1.display{color:var(--paper)}
+  .eyebrow .rule{background:var(--paper)}
+  .lede{color:rgba(245,244,240,.78)}
+  .hero-meta{border-top-color:rgba(245,244,240,.18)}
+  .hero-meta b{color:var(--paper)}
+  .hero-meta span{color:rgba(245,244,240,.55)}
+
+  /* glass cards over the video */
+  .field, .v-card, .cta-card{
+    background:rgba(10,10,10,.42);
+    backdrop-filter:blur(22px) saturate(140%);
+    -webkit-backdrop-filter:blur(22px) saturate(140%);
+    border-color:rgba(245,244,240,.14);
+    color:var(--paper);
+  }
+  .field:hover,.v-card:hover{border-color:rgba(245,244,240,.35)}
+  .field h3,.v-card h4,.cta-card h2{color:var(--paper)}
+  .field > p,.v-card p,.cta-card p{color:rgba(245,244,240,.72)}
+  .field-no{color:rgba(245,244,240,.6)}
+  .field-no::after{background:rgba(245,244,240,.18)}
+  .field ul li{border-top-color:rgba(245,244,240,.1);color:var(--paper)}
+  .field ul li:last-child{border-bottom-color:rgba(245,244,240,.1)}
+  .field ul li::before{background:var(--paper)}
+  .field .meta{border-top-color:rgba(245,244,240,.18)}
+  .field .years{color:var(--paper)}
+  .field .meta small{color:rgba(245,244,240,.55)}
+  .field-link{color:var(--paper)}
+  .field-link::after{background:var(--paper)}
+  .v-card .accent-dot{box-shadow:0 0 0 4px rgba(245,244,240,.06)}
+
+  .section-head p{color:rgba(245,244,240,.7)}
+  .section-head h2{color:var(--paper)}
+
+  /* region card sits darker/more solid */
+  .region{box-shadow:0 60px 120px -40px rgba(0,0,0,.7);background:rgba(10,10,10,.6);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);border:1px solid rgba(245,244,240,.12)}
+  .region-stats div{background:transparent}
+
+  .btn-primary{background:var(--paper);color:var(--ink);border-color:var(--paper)}
+  .btn-primary:hover{background:var(--accent);border-color:var(--accent);color:var(--paper)}
+  .btn-ghost{border-color:rgba(245,244,240,.4);color:var(--paper)}
+  .btn-ghost:hover{background:var(--paper);color:var(--ink);border-color:var(--paper)}
+
+  .cta-card strong{color:var(--paper)!important}
+  .cta-card div[style*="margin-top"]{color:rgba(245,244,240,.7)!important}
+
+  /* ticker over video */
+  .ticker{border-color:rgba(245,244,240,.18);color:rgba(245,244,240,.78)}
+
+  footer{background:rgba(10,10,10,.78);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}
+  .foot-bottom{border-top-color:rgba(245,244,240,.12)}
 </style>
 </head>
 <body>
 
-<!-- ── DYNAMIC BACKGROUND LAYER ─────────────────────── -->
-<div class="bg" aria-hidden="true">
-  <div class="blob b1"></div>
-  <div class="blob b2"></div>
-  <div class="blob b3"></div>
-  <div class="blob b4"></div>
-</div>
+<!-- ── DYNAMIC VIDEO BACKGROUND (scroll-scrubbed) ───── -->
+<video class="bg-video" id="bgVideo"
+       src="assets/doors.mp4"
+       muted playsinline preload="auto"
+       aria-hidden="true"></video>
 <div class="bg-veil" aria-hidden="true"></div>
+<div class="bg-grain" aria-hidden="true"></div>
 <div class="progress" aria-hidden="true"></div>
+<div class="scrub-hint" aria-hidden="true">Scrollen, um Türen zu öffnen ↓</div>
 
 <!-- ── FOX LOGO (B&W) ───────────────────────────────── -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -751,21 +804,47 @@
   window.addEventListener('mousemove', onMouse, {passive:true});
   window.addEventListener('resize', onScroll);
 
+  /* video scroll-scrubbing */
+  const video = document.getElementById('bgVideo');
+  let videoReady = false;
+  let videoDuration = 0;
+
+  video.addEventListener('loadedmetadata', () => {
+    videoReady = true;
+    videoDuration = video.duration || 0;
+    video.pause();
+    try { video.currentTime = 0.001; } catch(e){}
+  });
+  /* iOS / Safari quirk: nudge a play()→pause() to enable seeking */
+  video.addEventListener('canplay', () => {
+    const p = video.play();
+    if (p && p.then) p.then(()=>video.pause()).catch(()=>{});
+  }, {once:true});
+
   function tick(){
-    /* easing for buttery motion */
     mx += (targetMx - mx) * 0.08;
     my += (targetMy - my) * 0.08;
-    scroll += (targetScroll - scroll) * 0.12;
+    scroll += (targetScroll - scroll) * 0.10;   /* eased = slow, cinematic */
+
     root.style.setProperty('--mx', mx.toFixed(2) + '%');
     root.style.setProperty('--my', my.toFixed(2) + '%');
     root.style.setProperty('--scroll', scroll.toFixed(4));
 
-    /* swap accent palette as user scrolls through page */
+    /* drive video frame from eased scroll progress */
+    if (videoReady && videoDuration > 0) {
+      const t = Math.max(0, Math.min(videoDuration - 0.05, scroll * videoDuration));
+      /* avoid spamming seeks when already close enough */
+      if (Math.abs(video.currentTime - t) > 0.015) {
+        try { video.currentTime = t; } catch(e){}
+      }
+    }
+
+    /* gentle palette rotation as user descends the page */
     const palettes = [
-      ['#4f46e5','#a3e635','#f97316','#06b6d4'], // top: indigo / lime / orange / cyan
-      ['#06b6d4','#4f46e5','#a3e635','#f97316'], // mid-upper
-      ['#f97316','#06b6d4','#4f46e5','#a3e635'], // mid-lower
-      ['#a3e635','#f97316','#06b6d4','#4f46e5']  // bottom
+      ['#4f46e5','#a3e635','#f97316','#06b6d4'],
+      ['#06b6d4','#4f46e5','#a3e635','#f97316'],
+      ['#f97316','#06b6d4','#4f46e5','#a3e635'],
+      ['#a3e635','#f97316','#06b6d4','#4f46e5']
     ];
     const seg = Math.min(palettes.length - 1, Math.floor(scroll * palettes.length));
     const p = palettes[seg];
